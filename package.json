@@ -1,0 +1,21 @@
+{
+  "name": "sectormap2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "area-polygon": "^1.0.1",
+    "delaunator": "^1.0.4",
+    "linkedlist": "git+https://github.com/kilianc/node-linkedlist.git",
+    "zeros": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  }
+}

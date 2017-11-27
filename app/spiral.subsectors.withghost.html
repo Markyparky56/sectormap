@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Sector Map Test</title>
+    <style>
+      body{margin:0;}
+    </style>
+  </head>
+  <body>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.3/seedrandom.min.js"></script>
+      <script src="./three.js"></script>
+      <script src="./bundle.js"></script>
+
+      <!-- Recording Section -->
+      <button id="record">Record</button>
+      <video id="video" autoplay loop></video>  
+      
+      <script>
+      let recordButton = document.getElementById("record");
+      let video = document.getElementById("video");
+      let recording = false;
+      let recordedBlobs = [];
+      let mediaRecorder = null;
+      let threeJsRendererStream = app.GetRenderer().domElement.captureStream();
+      recordButton.addEventListener('click', function(event)
+      {
+        toggleRecording();
+      });
+  
+      function toggleRecording()
+      {
+        if(recording)
+        {
+          console.log("Stopping recording!");
+          stopRecording();
+        }
+        else
+        {
+          console.log("Starting recording!");
+          startRecording();
+        }
+        recording = !recording;  
+        recordButton.textContent = (recording) ? "Stop" : "Record";          
+      }
+  
+      function startRecording()
+      {
+        recordedBlobs = [];
+        mediaRecorder = new MediaRecorder(threeJsRendererStream);
+        mediaRecorder.onstop = handleStop;
+        mediaRecorder.ondataavailable = handleDataAvailable;
+        mediaRecorder.start(100);
+        console.log("MediaRecorder started", mediaRecorder);
+      }
+  
+      function stopRecording()
+      {
+        mediaRecorder.stop();
+        let superBuffer = new Blob(recordedBlobs, {type:'video/mp4'});
+        video.src = window.URL.createObjectURL(superBuffer);
+      }
+  
+      function handleDataAvailable(event)
+      {
+        if(event.data && event.data.size > 0)
+        {
+          recordedBlobs.push(event.data);
+        }
+      }
+  
+      function handleStop(event)
+      {
+        console.log("Recorder stopped: ", event);
+      }
+  
+      </script>
+  </body>
+</html>
