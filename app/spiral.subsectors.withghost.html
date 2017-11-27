@@ -46,8 +46,13 @@
   
       function startRecording()
       {
+        let options = 
+        {
+          videoBitsPerSecond: 12000000,
+          mimeType:"video/webm\;codecs=h264"
+        }
         recordedBlobs = [];
-        mediaRecorder = new MediaRecorder(threeJsRendererStream);
+        mediaRecorder = new MediaRecorder(threeJsRendererStream, options);
         mediaRecorder.onstop = handleStop;
         mediaRecorder.ondataavailable = handleDataAvailable;
         mediaRecorder.start(100);

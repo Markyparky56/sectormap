@@ -3,7 +3,6 @@
 //import * as THREE from './three';
 import Delaunator from 'delaunator';
 import areaOfPolygon from 'area-polygon';
-import earcut from 'earcut';
 import PoissonDiscSampler2D_Polygon from './poissondisc.poly';
 
 export default class SubSectorMap
