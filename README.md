@@ -1,3 +1,5 @@
+`npm install` to grab the required node modules
+
 Run `npm run build` to create `bundle.js` required by 
 `spiral.subsectors.withghost.html`. 
 
